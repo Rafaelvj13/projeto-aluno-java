@@ -1,6 +1,7 @@
 package curso.executavel;
 
 import cursojava.classes.Aluno;
+import cursojava.classes.Disciplina;
 
 import javax.swing.*;
 
@@ -18,18 +19,6 @@ public class PrimeiraClasse {
         String nomeEscola = JOptionPane.showInputDialog("Qual o nome da escola?");
         String serieMatriculada = JOptionPane.showInputDialog("Qual a serie Matriculada?");
 
-        String disciplia1 = JOptionPane.showInputDialog("informe a disciplina 1:");
-        String nota1 = JOptionPane.showInputDialog("digite a nota 1 ");
-
-        String disciplia2 = JOptionPane.showInputDialog("informe a disciplina 2:");
-        String nota2 = JOptionPane.showInputDialog("digite a nota 2 ");
-
-        String disciplia3 = JOptionPane.showInputDialog("informe a disciplina 3:");
-        String nota3 = JOptionPane.showInputDialog("digite a nota 3 ");
-
-        String disciplia4 = JOptionPane.showInputDialog("informe a disciplina 4:");
-        String nota4 = JOptionPane.showInputDialog("digite a nota 4 ");
-
 
         Aluno aluno1 = new Aluno();
 
@@ -44,17 +33,24 @@ public class PrimeiraClasse {
         aluno1.setNomeEscola(nomeEscola);
         aluno1.setSerieMatriculado(serieMatriculada);
 
-        aluno1.setDisciplina1(disciplia1);
-        aluno1.setNota1(Double.parseDouble(nota1));
+        for (int pos = 1; pos <= 4; pos++){
+            String nomeDisciplina = JOptionPane.showInputDialog("Nome disciplina?" +pos+ " ?");
+            String notaDisciplina = JOptionPane.showInputDialog("Informe a nota" +pos+ " ?");
 
-        aluno1.setDisciplina2(disciplia2);
-        aluno1.setNota2(Double.parseDouble(nota2));
+            Disciplina disciplina = new Disciplina();
+            disciplina.setDisciplina(nomeDisciplina);
+            disciplina.setNota(Double.valueOf(notaDisciplina));
 
-        aluno1.setDisciplina3(disciplia3);
-        aluno1.setNota3(Double.parseDouble(nota3));
+            aluno1.getDisciplinas().add(disciplina);
+        }
 
-        aluno1.setDisciplina4(disciplia4);
-        aluno1.setNota4(Double.parseDouble(nota4));
+        int escolha = JOptionPane.showConfirmDialog(null, "Deseja remover alguma disciplina?");
+
+        if (escolha == 0) {
+            String disciplinaRemover = JOptionPane.showInputDialog("Qual disciplina 0, 1, 2 ou 3");
+            aluno1.getDisciplinas().remove(Integer.valueOf(disciplinaRemover).intValue() -1);
+
+        }
 
         System.out.println(aluno1.toString());
         System.out.println("Média do Aluno = " + aluno1.getMediaNota());
